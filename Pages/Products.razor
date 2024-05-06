@@ -1,0 +1,47 @@
+﻿@page "/product"
+@using CursoBlazorWebAssembly.Models
+@inject ILogger<Product> logger;
+@using CursoBlazorWebAssembly.Service
+@inject IProductService productService;
+
+
+
+<PageTitle>Products</PageTitle>
+
+<ModuleTitle Title="Products"/>
+
+@if (products.Count > 0)
+{
+    <div class="products-container">
+        @foreach (var product in products)
+        {
+            <div class="card">
+                <img src="@product.Images[0]" alt="Product" class="card-img-top" loading="lazy" width="270"/>
+                <div class="card-body">
+                    <h4><b>@product.Title</b></h4>
+                    <p>@product.Price?.ToString("C")</p>
+                </div>
+            </div>
+        }
+    </div>
+}
+else
+{
+    <p>No hay productos</p>
+}
+
+@code {
+    //
+    //                <button title="Eliminar" class="btn btn-danger btn-delete" onclick="@(()=>Delete(product))"><span class="oi oi-trash"></span></button>
+    private List<Product> products;
+
+    protected override async Task OnInitializedAsync()
+    {
+        products = await GetProducts();
+    }
+
+    private async Task<List<Product>> GetProducts()
+    {
+        return await productService.GetProducts(); 
+    }
+}
