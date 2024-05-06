@@ -10,10 +10,10 @@ namespace CursoBlazorWebAssembly.Service
 
         private readonly JsonSerializerOptions _serializerOptions;
 
-        public ProductService(HttpClient httpClient, JsonSerializerOptions options)
+        public ProductService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _serializerOptions = options;
+            _serializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive = true };
         }
 
 

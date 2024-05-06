@@ -12,10 +12,10 @@ namespace CursoBlazorWebAssembly.Service
 
 
 
-        public CategoryService(HttpClient httpClient, JsonSerializerOptions serializerOptions)
+        public CategoryService(HttpClient httpClient)
         {
             _httpClient = httpClient;
-            _serializerOptions = serializerOptions;
+            _serializerOptions = new JsonSerializerOptions { PropertyNameCaseInsensitive=true};
         }
 
 
