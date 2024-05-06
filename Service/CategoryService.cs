@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace CursoBlazorWebAssembly.Service
 {
-    public class CategoryService
+    public class CategoryService:ICategoryService
     {
         private readonly HttpClient _httpClient;
 
@@ -50,5 +50,14 @@ namespace CursoBlazorWebAssembly.Service
                 throw new ApplicationException(content);
             }
         }
+    }
+
+
+
+    public interface ICategoryService
+    {
+        Task<List<Category>?> GetCategories();
+        Task AddCategory(Category category);
+        Task DeleteCategory(int categoryId);
     }
 }

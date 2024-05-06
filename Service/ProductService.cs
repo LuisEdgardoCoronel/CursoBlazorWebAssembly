@@ -4,7 +4,7 @@ using System.Text.Json;
 
 namespace CursoBlazorWebAssembly.Service
 {
-    public class ProductService
+    public class ProductService:IProductService
     {
         private readonly HttpClient _httpClient;
 
@@ -20,8 +20,13 @@ namespace CursoBlazorWebAssembly.Service
         public async Task<List<Product>?> GetProducts()
         {
             var response = await _httpClient.GetAsync("/v1/products");
+            var content = await response.Content.ReadAsStringAsync();
+            if (!response.IsSuccessStatusCode)
+            {
+                throw new ApplicationException(content);
+            }
 
-            return await JsonSerializer.DeserializeAsync<List<Product>>(await response.Content.ReadAsStreamAsync());
+            return JsonSerializer.Deserialize<List<Product>>(content, _serializerOptions);
         }
 
 
@@ -55,6 +60,15 @@ namespace CursoBlazorWebAssembly.Service
                 throw new ApplicationException(content);
             }
         }
+
+    }
+
+    public interface IProductService
+    {
+        Task<List<Product>?> GetProducts();
+        Task AddProducts(Product product);
+        Task UpdateProduct(int productID, Product product);
+        Task DeleteProducts(int productID);
 
     }
 }
