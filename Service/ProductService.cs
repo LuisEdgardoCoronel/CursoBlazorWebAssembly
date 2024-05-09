@@ -19,7 +19,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task<List<Product>?> GetProducts()
         {
-            var response = await _httpClient.GetAsync("/v1/products");
+            var response = await _httpClient.GetAsync("api/v1/products");
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
@@ -32,7 +32,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task AddProducts(Product product)
         {
-            var response = await _httpClient.PostAsync($"v1/products", JsonContent.Create(product));
+            var response = await _httpClient.PostAsync($"api/v1/products", JsonContent.Create(product));
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
@@ -43,7 +43,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task UpdateProduct(int productID, Product product)
         {
-            var response = await _httpClient.PutAsync($"v1/products/{productID}", JsonContent.Create(product));
+            var response = await _httpClient.PutAsync($"api/v1/products/{productID}", JsonContent.Create(product));
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
