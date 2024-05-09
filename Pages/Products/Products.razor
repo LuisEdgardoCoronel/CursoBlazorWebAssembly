@@ -3,19 +3,20 @@
 @inject ILogger<Product> logger;
 @using CursoBlazorWebAssembly.Service
 @inject IProductService productService;
-
+@inject NavigationManager navigationManager
 
 
 <PageTitle>Products</PageTitle>
 
 <ModuleTitle Title="Products"/>
 
+<button class="btn btn-danger" @onclick="@(()=> navigationManager.NavigateTo("/addProduct"))">agregar producto</button>
 @if (products.Count > 0)
 {
-    <div class="products-container">
+    <div class="row">
         @foreach (var product in products)
         {
-            <div class="card">
+            <div class="card p-1 m-4 border-0 shadow-lg col">
                 <img src="@product.Images[0]" alt="Product" class="card-img-top" loading="lazy" width="270"/>
                 <div class="card-body">
                     <h4><b>@product.Title</b></h4>
