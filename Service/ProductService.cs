@@ -53,7 +53,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task DeleteProducts(int productID)
         {
-            var response = await _httpClient.DeleteAsync($"v1/products/{productID}");
+            var response = await _httpClient.DeleteAsync($"api/v1/products/{productID}");
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
