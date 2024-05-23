@@ -22,7 +22,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task<List<Category>?> GetCategories() 
         {
-            var response = await _httpClient.GetAsync("v1/categories");
+            var response = await _httpClient.GetAsync("api/v1/categories");
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
@@ -33,7 +33,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task AddCategory(Category category)
         {
-            var response = await _httpClient.PostAsync("v1/categories", JsonContent.Create(category));
+            var response = await _httpClient.PostAsync("api/v1/categories", JsonContent.Create(category));
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
@@ -43,7 +43,7 @@ namespace CursoBlazorWebAssembly.Service
 
         public async Task DeleteCategory(int categoryId)
         {
-            var response = await _httpClient.DeleteAsync($"v1/categories/{categoryId}");
+            var response = await _httpClient.DeleteAsync($"api/v1/categories/{categoryId}");
             var content = await response.Content.ReadAsStringAsync();
             if (!response.IsSuccessStatusCode)
             {
